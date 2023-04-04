@@ -6,6 +6,7 @@ field int g;
 field int x;
 field int y;
 field int radius;
+field bool alive;
 
 constructor Bird new(int height) 
   {
@@ -15,10 +16,11 @@ constructor Bird new(int height)
     let x = 0;
     let y = height;
     let radius = 1;
+    let alive = true;
     return this;
   }
 
-method void turn(int deltaTime)
+method bool turn(int deltaTime, Pipe pipe)
 {
     var char key;
     let key = Keyboard.keyPressed();
@@ -28,6 +30,20 @@ method void turn(int deltaTime)
     }
     do gravitation(int deltaTime);
     do draw();
+    do getAlive(pipe)
+    return alive;
+}
+
+method void getAlive(Pipe pipe)
+{
+    if (pipe.contains(x, y))	// Толин метод
+    { 
+	let alive = false;
+    }
+    if (y < 0)
+    {
+	let alive = false;
+    }
     return;
 }
 
@@ -40,22 +56,23 @@ method void draw()
 
 method void jump()
 {
-    let speedY = 1000;  // Если ось У направлена вниз, значение должно быть отрицательным 
+    let speedY = -1000;  // Если ось ОУ направлена вниз, значение должно быть отрицательным 
     return;   
 }
 
 method void gravitation(int deltaTime)
 {
-    
-    if (y > (255 - radius)) 
+    var int newY;
+    let newY = y + deltaTime * speedY + g / 2 * deltaTime * deltaTime;
+    if (newY > (255 - radius)) // Если newУ уходит вниз за пределы экрана (считаю что ось ОУ направлена вниз)
     {
-      let y = y + deltaTime * speedY + g / 2 * deltaTime * deltaTime;
+      let y = 255;
     } 
-    let speedY = speedY + g * deltaTime; 
-    if (speedY < 0)
+    else
     {
-	speedY = 0;
+      let y = newY;
     }
+    let speedY = speedY + g * deltaTime;
     return;
 }
 }
