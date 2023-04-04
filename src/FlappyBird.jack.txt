@@ -30,6 +30,7 @@ class FlappyBird
       // 1 тимейт д......, когда его попросили написать эту функцию делегировал задачу chatgpt,
       // поэтому здесь так много комментариев к очевидным строкам,
       // а мне еще потом половину строк пришлось исправлять
+      // upd: все строки, он забыл do написать
   }
 
     method void run(){
@@ -41,18 +42,23 @@ class FlappyBird
         // do waitForGameToStart();
         let last_key = 32;
         while (~(key = 81)) { // 'q' key
+            // moveall
             do bird.turn();
             do movePipes();
+
+            // poxui
             do handleCollisions();
+
+            //draw
             do bird.draw();
             do drawPipes();
 
             // If collision found, go to score and reset state.
-            if (findCollision()) {
-              do displayScore();
+            if (~(isBirdAlive)) {
+              //do displayScore();
               do Sys.wait(3000);
-              do initializeGameState();
-              do waitForGameToStart();
+              //do initializeGameState();
+              //do waitForGameToStart();
             }
 
             // Draw updated game to screen.
@@ -105,7 +111,7 @@ class FlappyBird
             let pipe = pipes[pipeNowIndex];
             let birdAlive = do bird.getAlive(pipe);
             if (~(birdAlive)){
-              let isBirdAlive=False
+              let isBirdAlive=False;
               return;
             }
             let pipeNowIndex = pipeNowIndex + 1;
@@ -131,7 +137,7 @@ class FlappyBird
 
     method int pipeHeightByNumber(int number){
         var int height;
-        let height=45+number*25 + number*number*5l;
+        let height = number*ceed+70;
         while (height>40000){
             let height = height - 40000;
         }
