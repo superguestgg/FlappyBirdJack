@@ -4,17 +4,19 @@ class FlappyBird
   field int maxTotal;
   field int ceed;
   field int total;
+  field Array pipes;
+  field int pipeSpawnNumber;
 
   constructor FlappyBirdGame new() {
       let bird_height_default = 150;
       let bird = Bird.new(bird_height_default);
-      let scoreboard = Scoreboard.new();
+      //let scoreboard = Scoreboard.new();
       let pipes = Array.new(10);
-      let count_pipes = 0;
-      let dist_between_pipes = 100;
-      let dist_after_last_pipe = 0;
-      let jumps = 1;
-      let total_pipes = 0;
+      //let count_pipes = 0;
+      //let dist_between_pipes = 100;
+      //let dist_after_last_pipe = 0;
+      //let jumps = 1;
+      //let total_pipes = 0;
 
       return this;
     }
@@ -29,43 +31,112 @@ class FlappyBird
       // а мне еще потом половину строк пришлось исправлять
   }
 
-  method void run(){
-    do createGame();
-    //var char key;
-    //var char last_key;
+    method void run(){
+        do createGame();
+        var char key;
+        var char last_key;
 
-    
-    do waitForGameToStart();
-    let last_key = 32;
-    while (~(key = 81)) { // 'q' key
+        
+        // do waitForGameToStart();
+        let last_key = 32;
+        while (~(key = 81)) { // 'q' key
+            do bird.turn();
+            do movePipes();
+            do handleCollisions();
+            do bird.draw();
+            do drawPipes();
 
-        // Determine if new jump has occurred.
-        if ((key = 32) & ~(last_key = 32)) {      // space bar
-          let jumps = jumps + 1;
-          do bird.moveUp();
-        } else {
-          do updateBirdFallState();
-          do updateBirdWingState();
+            // If collision found, go to score and reset state.
+            if (findCollision()) {
+              do displayScore();
+              do Sys.wait(3000);
+              do initializeGameState();
+              do waitForGameToStart();
+            }
+
+            // Draw updated game to screen.
+            // do draw();
+
+            // Check key pressed.
+            let last_key = key;
+            let key = Keyboard.keyPressed();
+            do Sys.wait(10);
         }
-
-        // If collision found, go to score and reset state.
-        if (findCollision()) {
-          do displayScore();
-          do Sys.wait(3000);
-          do initializeGameState();
-          do waitForGameToStart();
-        }
-
-        // Draw updated game to screen.
-        do draw();
-
-        // Check key pressed.
-        let last_key = key;
-        let key = Keyboard.keyPressed();
-        do Sys.wait(10);
     }
 
-  method createGame(){
+    method void createGame(){
+        bird.draw();
+        createPipes();
+        drawPipes();
+        return;
+    }
 
-  }
+
+    method void movePipes(){
+        var int pipeNowIndex;
+        let pipeNowIndex=0;
+        while (pipeNowIndex<10){
+            pipes[pipeNowIndex].turn();
+            let pipeNowIndex = pipeNowIndex + 1;
+        }
+        return;
+    }
+
+
+    method void drawPipes(){
+        var int pipeNowIndex;
+        let pipeNowIndex=0;
+        while (pipeNowIndex<10){
+            pipes[pipeNowIndex].draw();
+            let pipeNowIndex = pipeNowIndex + 1;
+        }
+        return;
+    }
+
+    
+    method void handleCollisions(){
+        var int pipeNowIndex;
+        let pipeNowIndex=0;
+        while (pipeNowIndex < 10){
+            var Pipe pipe;
+            let pipe = pipes[pipeNowIndex];
+            bird.collision(pipe);
+            let pipeNowIndex = pipeNowIndex + 1;
+        }
+        return;
+    }
+
+    method void createPipes(){
+        let pipeSpawnNumber = 0;
+        var int pipeNowIndex;
+        let pipeNowIndex=0;
+        while (pipeNowIndex < 10){
+            let pipeSpawnNumber = pipeSpawnNumber + 1;
+            var Pipe pipe;
+            var int pipeHeight;
+            let pipeHeight = pipeHeightByNumber(pipeSpawnNumber);
+            let pipe = Pipe.new();
+            bird.collision(pipe);
+            let pipeNowIndex = pipeNowIndex + 1;
+        }
+        return;
+    }
+
+    method int pipeHeightByNumber(int number){
+        var int height;
+        let height=45+number*25 + number*number*5l;
+        while (height>40000){
+            let height = height-40000;
+        }
+        while (height>4000){
+            let height = height-4000;
+        }
+        while (height>400){
+            let height = height-400;
+        }
+        if (height<50){
+            let height = 50;
+        }
+        return height;
+    }
 }
