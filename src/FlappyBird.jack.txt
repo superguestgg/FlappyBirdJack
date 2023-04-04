@@ -7,10 +7,12 @@ class FlappyBird
   field Array pipes;
   field int pipeSpawnNumber;
   field bool isBirdAlive;
+  field int birdX;
 
   constructor FlappyBirdGame new() {
       let bird_height_default = 150;
       let bird = Bird.new(bird_height_default);
+      let birdX = 0;
       //let scoreboard = Scoreboard.new();
       let pipes = Array.new(10);
       //let count_pipes = 0;
@@ -38,11 +40,12 @@ class FlappyBird
         var char key;
         var char last_key;
 
-        
-        // do waitForGameToStart();
+        do waitForGameToStart();
         let last_key = 32;
+
         while (~(key = 81)) { // 'q' key
             // moveall
+            let birdX = birdX + 10;
             do bird.turn();
             do movePipes();
 
@@ -56,9 +59,10 @@ class FlappyBird
             // If collision found, go to score and reset state.
             if (~(isBirdAlive)) {
               //do displayScore();
-              do Sys.wait(3000);
+              do Sys.wait(1000);
               //do initializeGameState();
               //do waitForGameToStart();
+              return;
             }
 
             // Draw updated game to screen.
@@ -69,6 +73,7 @@ class FlappyBird
             let key = Keyboard.keyPressed();
             do Sys.wait(10);
         }
+        return;
     }
 
     method void createGame(){
@@ -128,8 +133,8 @@ class FlappyBird
             var Pipe pipe;
             var int pipeHeight;
             let pipeHeight = pipeHeightByNumber(pipeSpawnNumber);
-            let pipe = Pipe.new();
-            do bird.collision(pipe);
+            let pipe = Pipe.new(pipeHeight);
+            //do bird.collision(pipe);
             let pipeNowIndex = pipeNowIndex + 1;
         }
         return;
@@ -151,5 +156,36 @@ class FlappyBird
             let height = 50;
         }
         return height;
+    }
+
+    method void waitForGameToStart(){
+        var char key;
+        let key = Keyboard.keyPressed();
+
+        while (key = 0) {
+            do Sys.wait(10);
+            let key = Keyboard.keyPressed();
+            //do bird.draw();
+            //do updateBirdWingState();
+        }
+
+        return;
+    }
+
+    method createNewPipe(){
+        var int pipeNowIndex;
+        let pipeNowIndex=0;
+        while (pipeNowIndex < 9){
+            let pipeSpawnNumber = pipeSpawnNumber + 1;
+            var Pipe pipe;
+            let pipe = pipes[pipeNowIndex+1];
+            pipes[pipeNowIndex] = pipe;
+            let pipeNowIndex = pipeNowIndex + 1;
+        }
+        let pipeSpawnNumber = pipeSpawnNumber + 1;
+        var int pipeHeight;
+        let pipeHeight = pipeHeightByNumber(pipeSpawnNumber);
+        pipes[9] = new Pipe.new(pipeHeight);
+        return;
     }
 }
