@@ -26,6 +26,7 @@ method void turn(int deltaTime, bool wasClick)
     }
     do gravitation(int deltaTime);
     do draw();
+    return;
 }
 
 method void draw()
@@ -37,7 +38,7 @@ method void draw()
 
 method void jump()
 {
-    let speedY = 100;
+    let speedY = 1000;
     return;   
 }
 
