@@ -7,6 +7,7 @@ class FlappyBird
 
   constructor FlappyBirdGame new() {
       let bird_height_default = 150;
+      let bird = Bird.new(bird_height_default);
       let scoreboard = Scoreboard.new();
       let pipes = Array.new(10);
       let count_pipes = 0;
@@ -19,16 +20,19 @@ class FlappyBird
     }
 
   method prestart() {
-    Screen.clearScreen(); // Очистить экран
-    let seed = Keyboard.readInt("Введите число(сид): "); // Запросить у пользователя ввод числа
-    Screen.setCursor(8, 0); // Установить курсор в позицию (8,0)
-    Screen.printString("Нажмите на клавиатуру, чтобы начать игру."); // Напечатать сообщение
+      Screen.clearScreen(); // Очистить экран
+      let ceed = Keyboard.readInt("Введите число число для генерации местности: "); // Запросить у пользователя ввод числа
+      Screen.moveCursor(8, 0); // Установить курсор в позицию (8,0)
+      Screen.printString("Нажмите на клавиатуру, чтобы начать игру."); // Напечатать сообщение
+      // 1 тимейт д......, когда его попросили написать эту функцию делегировал задачу chatgpt,
+      // поэтому здесь так много комментариев к очевидным строкам,
+      // а мне еще потом половину строк пришлось исправлять
   }
 
   method void run(){
     do createGame();
-    var char key;
-    var char last_key;
+    //var char key;
+    //var char last_key;
 
     
     do waitForGameToStart();
