@@ -1,0 +1,17 @@
+class Main
+{
+    function void main()
+    { 
+        var FlappyBird game;
+        let game = FlappyBird.new();
+	    do game.prestart();
+        var char gameStarted;
+        let gameStarted = readChar();
+        // Здесь начинается игра
+
+        do game.run();
+
+        do game.dispose();
+        return;
+    }
+}

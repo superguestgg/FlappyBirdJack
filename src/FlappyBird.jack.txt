@@ -1,0 +1,67 @@
+class FlappyBird
+{
+  field Bird bird;
+  field int maxTotal;
+  field int ceed;
+  field int total;
+
+  constructor FlappyBirdGame new() {
+      let bird_height_default = 150;
+      let scoreboard = Scoreboard.new();
+      let pipes = Array.new(10);
+      let count_pipes = 0;
+      let dist_between_pipes = 100;
+      let dist_after_last_pipe = 0;
+      let jumps = 1;
+      let total_pipes = 0;
+
+      return this;
+    }
+
+  method prestart() {
+    Screen.clearScreen(); // Очистить экран
+    let seed = Keyboard.readInt("Введите число(сид): "); // Запросить у пользователя ввод числа
+    Screen.setCursor(8, 0); // Установить курсор в позицию (8,0)
+    Screen.printString("Нажмите на клавиатуру, чтобы начать игру."); // Напечатать сообщение
+  }
+
+  method void run(){
+    do createGame();
+    var char key;
+    var char last_key;
+
+    
+    do waitForGameToStart();
+    let last_key = 32;
+    while (~(key = 81)) { // 'q' key
+
+        // Determine if new jump has occurred.
+        if ((key = 32) & ~(last_key = 32)) {      // space bar
+          let jumps = jumps + 1;
+          do bird.moveUp();
+        } else {
+          do updateBirdFallState();
+          do updateBirdWingState();
+        }
+
+        // If collision found, go to score and reset state.
+        if (findCollision()) {
+          do displayScore();
+          do Sys.wait(3000);
+          do initializeGameState();
+          do waitForGameToStart();
+        }
+
+        // Draw updated game to screen.
+        do draw();
+
+        // Check key pressed.
+        let last_key = key;
+        let key = Keyboard.keyPressed();
+        do Sys.wait(10);
+    }
+
+  method createGame(){
+
+  }
+}
