@@ -9,7 +9,6 @@ field int radius;
 
 constructor Bird new(int height) 
   {
-    do drawBird();
     let speedX = 0;
     let speedY = 0;
     let g = 10;
@@ -26,10 +25,10 @@ method void turn(int deltaTime, bool wasClick)
 	do jump;
     }
     do gravitation(int deltaTime);
-    do drawBird();
+    do draw();
 }
 
-method void drawBird()
+method void draw()
 {
     do Screen.drawCircle(x, y, radius, 255);
 
@@ -38,7 +37,7 @@ method void drawBird()
 
 method void jump()
 {
-    let speedY = 10;
+    let speedY = 100;
     return;   
 }
 
