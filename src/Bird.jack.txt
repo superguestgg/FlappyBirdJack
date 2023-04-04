@@ -1,0 +1,58 @@
+class Bird
+{
+field int speedX;
+field int speedY;
+field int g;
+field int x;
+field int y;
+field int radius;
+
+constructor Bird new(int height) 
+  {
+    let speedX = 0;
+    let speedY = 0;
+    let g = 10;
+    let x = 0;
+    let y = height;
+    let radius = 1;
+    return this;
+  }
+
+method void turn(int deltaTime, bool wasClick)
+{
+    if (wasClick = true)
+    {
+	do jump;
+    }
+    do gravitation(int deltaTime);
+    do draw();
+}
+
+method void draw()
+{
+    do Screen.drawCircle(x, y, radius, 255);
+
+    return;
+}
+
+method void jump()
+{
+    let speedY = 100;
+    return;   
+}
+
+method void gravitation(int deltaTime)
+{
+    
+    if (y > (255 - radius)) 
+    {
+      let y = y + deltaTime * speedY + g / 2 * deltaTime * deltaTime;
+    } 
+    let speedY = speedY + g * deltaTime; 
+    if (speedY < 0)
+    {
+	speedY = 0;
+    }
+    return;
+}
+}
