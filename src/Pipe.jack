@@ -1,0 +1,57 @@
+class Pipe
+ {
+    field int x; // горизонтальная координата трубы (левая граница)
+    field int gapY; // координата дырки (координата нижней границы верхней трубы)
+    field int width; // ширина трубы
+    field int gapSize; // высота дырки между двумя трубами
+    field bool passedScene; // прошла ли труба через всю сцену
+    
+    constructor Pipe new(int gapY1) {
+        let x = 500;
+        let width = 5;
+        let gapY = gapY1;
+        let gapSize = 50;
+        let passedScene = false;
+	    return this;
+    }
+    
+    method bool isCollidingWith(Bird bird)
+    {
+        return false;
+        /*
+        if (((bird.getX() + bird.getRadius()) > x) & ((bird.getX() - bird.getRadius()) < (x + width))) {
+            if (((bird.getY() - bird.getRadius()) > (250 - gapY - gapSize)) & ((bird.getY() + bird.getRadius()) > (250 - gapY))) {
+                return true;
+            }
+    	}                   
+        return false;
+        */
+    }
+   
+    method void turn(int deltaTime) {
+		
+        let x = x - (deltaTime / 10);
+        let passedScene = (x < 0);
+        return;
+    }
+   
+    method bool hasPassed(Bird bird) {
+        return ((bird.getX() - bird.getRadius()) > (x + width));
+    }                   
+
+    method void draw() {
+        do Screen.setColor(true);
+        if (x > 0) {
+            do Screen.drawRectangle(x, 250-gapY, x + width, 250); // Были значения, выходящие за границы экрана
+        }
+        else {
+            do Screen.drawRectangle(0, 250-gapY, width, 250); // Были значения, выходящие за границы экрана
+        }
+	  return;
+    }
+    
+    method void dispose() {
+        do Memory.deAlloc(this);
+	    return;
+    }
+}
