@@ -37,19 +37,17 @@ class Pipe
 
      method void draw() {
         do Screen.setColor(true);
-        if (x > 0) {
-          do Screen.drawLine(x, 0, x, gapY);
-          do Screen.drawLine(x, gapY, x + width, gapY);
-          do Screen.drawLine(x + width, gapY, x + width, 0); 
+        if (true) {
+          do Screen.drawRectangle(x, 0, x + width, gapY);
         }
         else {
-          do Screen.drawLine(0, gapY, width + x, gapY);
-          do Screen.drawLine(width + x, gapY, width + x, 0); 
+
         }
 	  return;
     }
     
      method void dispose() {
         do Memory.deAlloc(this);
+	  return;
     }
 }

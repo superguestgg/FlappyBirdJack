@@ -7,7 +7,7 @@ var char gameStarted;
         let game = FlappyBird.new();
 	  do game.prestart();
         
-        let gameStarted = Keyboard.readChar();
+        // let gameStarted = Keyboard.readChar();
         // Здесь начинается игра
 
         do game.run();

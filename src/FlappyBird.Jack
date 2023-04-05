@@ -9,6 +9,8 @@ class FlappyBird
   field bool isBirdAlive;
   field int birdX;
   field int bird_height_default;
+  field int notDeletedPipes;
+  field int pipeCount;
 
   constructor FlappyBird new() {
       let bird_height_default = 150;
@@ -27,9 +29,9 @@ class FlappyBird
 
   method void prestart() {
       do Screen.clearScreen(); // Очистить экран
-      let ceed = Keyboard.readInt("Введите число число для генерации местности: "); // Запросить у пользователя ввод числа
-      do Screen.moveCursor(8, 0); // Установить курсор в позицию (8,0)
-      do Screen.printString("Нажмите на клавиатуру, чтобы начать игру."); // Напечатать сообщение
+      let ceed = Keyboard.readInt("Please enter a number for generate a area: "); // Запросить у пользователя ввод числа
+      //do Screen.moveCursor(8, 0); // Установить курсор в позицию (8,0)
+      do Output.printString("touch on a keyboard to start a game."); // Напечатать сообщение
       // 1 тимейт д......, когда его попросили написать эту функцию делегировал задачу chatgpt,
       // поэтому здесь так много комментариев к очевидным строкам,
       // а мне еще потом половину строк пришлось исправлять
@@ -41,14 +43,16 @@ class FlappyBird
         
         var char key;
         var char last_key;
+        do Screen.clearScreen();
         do createGame();
-        do waitForGameToStart();
+	  do drawPipes();
+        // do waitForGameToStart();
         let last_key = 32;
 
         while (~(key = 81)) { // 'q' key
             // moveall
             let birdX = birdX + 10;
-            do bird.turn();
+            do bird.turn(10);
             do movePipes();
 
             // poxui
@@ -81,20 +85,29 @@ class FlappyBird
     method void createGame(){
         do bird.draw();
         do createPipes();
-        do drawPipes();
+        
         return;
     }
 
 
     method void movePipes(){
         var int pipeNowIndex;
-var Pipe pipe;
+	  var Pipe pipe;
         let pipeNowIndex=0;
+	  let notDeletedPipes = 0;
         while (pipeNowIndex<10){
             
             let pipe = pipes[pipeNowIndex];
-            do pipe.turn();
+            do pipe.turn(10);
+            if (pipe.hasPassed(bird)){
+			let notDeletedPipes = notDeletedPipes + 1;
+		}
             let pipeNowIndex = pipeNowIndex + 1;
+        }
+	  while (notDeletedPipes>0){
+            
+            do createNewPipe();
+            let notDeletedPipes = notDeletedPipes - 1;
         }
         return;
     }
@@ -148,16 +161,16 @@ var Pipe pipe;
             
             let pipeHeight = pipeHeightByNumber(pipeSpawnNumber);
             let pipe = Pipe.new(pipeHeight);
-		do pipe.turn();
-		do pipe.turn();
-		do pipe.turn();
-		do pipe.turn();
-		do pipe.turn();
-		do pipe.turn();
-		do pipe.turn();
-		do pipe.turn();
-		do pipe.turn();
-		do pipe.turn();
+		//do pipe.turn();
+		//do pipe.turn();
+		//do pipe.turn();
+		//do pipe.turn();
+		//do pipe.turn();
+		//do pipe.turn();
+		//do pipe.turn();
+		//do pipe.turn();
+		//do pipe.turn();
+		//do pipe.turn();
             //do bird.collision(pipe);
             let pipeNowIndex = pipeNowIndex + 1;
         }

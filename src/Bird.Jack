@@ -13,9 +13,9 @@ constructor Bird new(int height)
     let speedX = 0;
     let speedY = 0;
     let g = 10;
-    let x = 0;
+    let x = 30;
     let y = height;
-    let radius = 1;
+    let radius = 5;
     let alive = true;
     return this;
   }
@@ -64,14 +64,15 @@ method bool getAlive(Pipe pipe)
 
 method void draw()
 {
-    do Screen.drawCircle(x, y, radius, 255);
+    do Screen.setColor(true);
+    do Screen.drawCircle(x, y, radius);
 
     return;
 }
 
 method void jump()
 {
-    let speedY = -1000;  // Если ось ОУ направлена вниз, значение должно быть отрицательным 
+    let speedY = -100;  // Если ось ОУ направлена вниз, значение должно быть отрицательным 
     return;   
 }
 
