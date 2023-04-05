@@ -1,0 +1,49 @@
+class Pipe
+ {
+    field int x; // горизонтальная координата трубы (левая граница)
+    field int gapY; // координата дырки (координата нижней границы верхней трубы)
+    field int width; // ширина трубы
+    field int gapSize; // высота дырки между двумя трубами
+    field bool passedScene; // прошла ли труба через всю сцену
+    
+    constructor Pipe new(int x1, int gapY1, int width1, int gapSize1) {
+        let x = x1;
+        let width = width1;
+        let gapY = gapY1;
+        let gapSize = gapSize1;
+    }
+    
+    method bool isCollidingWith(Bird bird)
+    {
+        if (bird.x + bird.radius >= x & bird.x - bird.radius <= x + width) {
+        if (bird.y + bird.radius >= gapY + gapSize & bird.y - bird.radius <= gapY) {
+            return true;
+        }
+    }                   
+        return false;
+    }
+   
+    method void moveAndUpdatePassedScene(int dx) {
+        let x = x - dx;
+        let passedScene = x + width <= 0;
+    }
+   
+    method bool hasPassed(Bird bird) {
+        return bird.x - bird.radius > x + width;
+    }                   
+    return false;
+    }
+
+     method void draw() {
+        Screen.setColor(true);
+        if (x > 0) {
+          do Screen.drawLine(x, 0, x, gapY);
+          do Screen.drawLine(x, gapY, x + width, gapY);
+          do Screen.drawLine(x + width, gapY, x + width, 0); 
+        }
+        else {
+          do Screen.drawLine(0, gapY, width + x, gapY);
+          do Screen.drawLine(width + x, gapY, width + x, 0); 
+        }
+    }
+}
