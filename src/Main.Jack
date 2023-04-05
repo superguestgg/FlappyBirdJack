@@ -3,10 +3,11 @@ class Main
     function void main()
     { 
         var FlappyBird game;
+var char gameStarted;
         let game = FlappyBird.new();
 	  do game.prestart();
-        var char gameStarted;
-        let gameStarted = readChar();
+        
+        let gameStarted = Keyboard.readChar();
         // Здесь начинается игра
 
         do game.run();

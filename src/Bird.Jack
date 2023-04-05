@@ -34,7 +34,7 @@ method void turn(int deltaTime)
     return;
 }
 
-method void getAlive(Pipe pipe)
+method bool getAlive(Pipe pipe)
 {
     if (pipe.isCollidingWith(this))	// Толин метод
     { 
@@ -44,7 +44,7 @@ method void getAlive(Pipe pipe)
     {
 	let alive = false;
     }
-    return;
+    return alive;
 }
 
 method void draw()
