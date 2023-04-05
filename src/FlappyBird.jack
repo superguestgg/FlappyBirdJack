@@ -4,20 +4,22 @@ class FlappyBird
   field int maxTotal;
   field int ceed;
   field int total;
-  field Array pipes;
+  field Array pipes; // массив всех труб
   field int pipeSpawnNumber;
   field bool isBirdAlive;
   field int birdX;
   field int bird_height_default;
   field int notDeletedPipes;
-  field int pipeCount;
+  field int windiowPipeCount; //какое количество труб влазит на экран
 
   constructor FlappyBird new() {
       let bird_height_default = 150;
       let bird = Bird.new(bird_height_default);
-      let birdX = 0;
+      let windiowPipeCount = 8;
+      let isBirdAlive = true;
+      //let birdX = 0;
       //let scoreboard = Scoreboard.new();
-      let pipes = Array.new(10);
+      let pipes = Array.new(windiowPipeCount);
       //let count_pipes = 0;
       //let dist_between_pipes = 100;
       //let dist_after_last_pipe = 0;
@@ -30,7 +32,7 @@ class FlappyBird
   method void prestart() {
       do Screen.clearScreen(); // Очистить экран
       let ceed = Keyboard.readInt("Please enter a number for generate a area: "); // Запросить у пользователя ввод числа
-      //do Screen.moveCursor(8, 0); // Установить курсор в позицию (8,0)
+      // do Screen.moveCursor(8, 0); // Установить курсор в позицию (8,0)
       do Output.printString("touch on a keyboard to start a game."); // Напечатать сообщение
       // 1 тимейт д......, когда его попросили написать эту функцию делегировал задачу chatgpt,
       // поэтому здесь так много комментариев к очевидным строкам,
@@ -40,54 +42,63 @@ class FlappyBird
   }
 
     method void run(){
-        
         var char key;
-        var char last_key;
+        var int deltaTime;
+
+        let deltaTime = 10;
         do Screen.clearScreen();
         do createGame();
 	    do drawPipes();
         // do waitForGameToStart();
-        let last_key = 32;
         while (~(key = 81)) { // 'q' key
-            // moveall
             //do Output.printString("movePipes");
-            let birdX = birdX + 10;
-            do bird.turn(10);
-            do movePipes(10);
+            do bird.turn(deltaTime);
+            do movePipes(deltaTime);
 
-            // poxui
-            // do handleCollisions();
-
-            //draw
-            do bird.draw();
-            do drawPipes();
-
+            do handleCollisions();
             // If collision found, go to score and reset state.
-            /*if (~(isBirdAlive)) {
-                do Output.printString(" finish ");
-                //do displayScore();
+            if (~(isBirdAlive)) {
+                //do Output.printString(" finish ");
+                do finishGame();
                 do Sys.wait(1000);
                 //do initializeGameState();
                 //do waitForGameToStart();
                 return;
-            }*/
+            }
 
-            // Draw updated game to screen.
-            // do draw();
+            do draw();
 
             // Check key pressed.
-            let last_key = key;
             let key = Keyboard.keyPressed();
-            do Sys.wait(10);
-            do Screen.clearScreen();
+            do Sys.wait(deltaTime);
+            
         }
         return;
     }
 
+
+    method void finishGame(){
+        do Output.printString(" you died. ");
+        do Output.printString(" you died. ");
+        do Output.printString(" you died. ");
+        do Output.printString(" you died. ");
+        do Output.printString(" pipes finished: ");
+        do Output.printInt(pipeSpawnNumber - windiowPipeCount);
+        return;
+    }
+
+
     method void createGame(){
         do bird.draw();
         do createPipes();
-        
+        return;
+    }
+
+
+    method void draw(){
+        do Screen.clearScreen();
+        do bird.draw();
+        do drawPipes();
         return;
     }
 
@@ -98,17 +109,16 @@ class FlappyBird
         let pipeNowIndex=0;
 	    let notDeletedPipes = 0;
 
-        while (pipeNowIndex<10){
+        while (pipeNowIndex < windiowPipeCount){
             
             let pipe = pipes[pipeNowIndex];
             do pipe.turn(deltaTime);
             if (pipe.hasPassed(bird)){
-			let notDeletedPipes = notDeletedPipes + 1;
-		}
+			    let notDeletedPipes = notDeletedPipes + 1;
+		    }
             let pipeNowIndex = pipeNowIndex + 1;
         }
-	  while (notDeletedPipes>0){
-            
+	    while (notDeletedPipes > 0){
             do createNewPipe();
             let notDeletedPipes = notDeletedPipes - 1;
         }
@@ -120,7 +130,7 @@ class FlappyBird
         var int pipeNowIndex;
 	    var Pipe pipe;
         let pipeNowIndex = 0;
-        while (pipeNowIndex < 10){
+        while (pipeNowIndex < windiowPipeCount){
 		    let pipe = pipes[pipeNowIndex];
             do pipe.draw();
             let pipeNowIndex = pipeNowIndex + 1;
@@ -131,13 +141,12 @@ class FlappyBird
     
     method void handleCollisions(){
         var int pipeNowIndex;
-	  var Pipe pipe;
-
+	    var Pipe pipe;
         var bool birdAlive;
 
         let pipeNowIndex=0;
         let birdAlive = true;
-        while (pipeNowIndex < 10){
+        while (pipeNowIndex < windiowPipeCount){
             
             let pipe = pipes[pipeNowIndex];
 
@@ -156,25 +165,16 @@ class FlappyBird
         var Pipe pipe;
         var int pipeNowIndex;
 	    var int pipeHeight;
+
         let pipeSpawnNumber = 0;
-        
         let pipeNowIndex=0;
-        while (pipeNowIndex < 10){
+        while (pipeNowIndex < windiowPipeCount){
             let pipeSpawnNumber = pipeSpawnNumber + 1;
-            
             let pipeHeight = pipeHeightByNumber(pipeSpawnNumber);
             let pipe = Pipe.new(pipeHeight);
             let pipes[pipeNowIndex] = pipe; // Не было заполнения массива
-            do pipe.turn((10 - pipeNowIndex) * 300);
-            //do pipe.turn();
-            //do pipe.turn();
-            //do pipe.turn();
-            //do pipe.turn();
-            //do pipe.turn();
-            //do pipe.turn();
-            //do pipe.turn();
-            //do pipe.turn();
-            //do pipe.turn();
+            do pipe.turn((windiowPipeCount - pipeNowIndex) * 500);
+
             //do bird.collision(pipe);
             let pipeNowIndex = pipeNowIndex + 1;
         }
@@ -183,19 +183,15 @@ class FlappyBird
 
     method int pipeHeightByNumber(int number){
         var int height;
-        let height = number*ceed*10+70;
-        while (height > 20000){
-            let height = height - 20000;
+        let height = number * ceed * 11 + 31;
+        if (height > 1000){
+            let height = height - (height / 1000);
         }
-        while (height > 4000){
-            let height = height - 4000;
+        while (height > 135){
+            let height = height - 135;
         }
-        while (height > 175){
-            let height = height - 175;
-        }
-        if (height < 50){
-            let height = 50;
-        }
+        let height = height + 40;
+        
         return height;
     }
 
@@ -218,9 +214,10 @@ class FlappyBird
         var int pipeHeight;
         var Pipe pipe;
         let pipeNowIndex=0;
-        let pipe = pipes[pipeNowIndex+1];
+        let pipe = pipes[0];
+        do pipe.dispose();
 
-        while (pipeNowIndex < 9){
+        while (pipeNowIndex < (windiowPipeCount-1)){
             let pipeSpawnNumber = pipeSpawnNumber + 1;
 
             let pipe = pipes[pipeNowIndex+1];
@@ -230,7 +227,7 @@ class FlappyBird
         let pipeSpawnNumber = pipeSpawnNumber + 1;
         
         let pipeHeight = pipeHeightByNumber(pipeSpawnNumber);
-        let pipes[9] = Pipe.new(pipeHeight);
+        let pipes[(windiowPipeCount - 1)] = Pipe.new(pipeHeight);
         return;
     }
 }

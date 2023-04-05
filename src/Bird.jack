@@ -9,7 +9,7 @@ field int radius;
 field bool alive;
 
 constructor Bird new(int height) 
-  {
+{
     let speedX = 0;
     let speedY = 0;
     let g = 10;
@@ -18,7 +18,7 @@ constructor Bird new(int height)
     let radius = 5;
     let alive = true;
     return this;
-  }
+}
 
 method int getX()
 {
@@ -43,8 +43,8 @@ method void turn(int deltaTime)
 	    do jump();
     }
     do gravitation(deltaTime);
-    do draw();
-    //do getAlive(pipe)
+    do checkCoordinate();
+    //do getAlive(pipe);
     return;
 }
 
@@ -52,15 +52,15 @@ method bool getAlive(Pipe pipe)
 {
     if (pipe.isCollidingWith(this))	// Толин метод
     { 
-	let alive = false;
+	    let alive = false;
     }
     if (y < 0)
     {
-	let alive = false;
+	    let alive = false;
     }
     if (y > 255)
     {
-	let alive = false;
+	    let alive = false;
     }
     return alive;
 }
@@ -76,23 +76,27 @@ method void draw()
 method void jump()
 {
     let speedY = -20;  // Если ось ОУ направлена вниз, значение должно быть отрицательным 
-    return;   
+    return;
 }
 
 method void gravitation(int deltaTime)
 {
-    var int newY;
-    let newY = y + (deltaTime * speedY / 50); // Была неккоретная формула со скобками
-    if (newY > (255 - radius)) // Если newУ уходит вниз за пределы экрана (считаю что ось ОУ направлена вниз)
-    {
-      let y = (255 - radius);
-      //let getAlive = false;
-    } 
-    else
-    {
-        let y = newY;
-    }
+    let y = y + (deltaTime * speedY / 50); // Была неккоретная формула со скобками
     let speedY = speedY + (g * deltaTime / 50);
+    return;
+}
+
+method void checkCoordinate()
+{
+    if (y > (255 - radius)) // Если newУ уходит вниз за пределы экрана (считаю что ось ОУ направлена вниз)
+    {
+        let y = (255 - radius);
+        //let getAlive = false;
+    } 
+    if (y < 5)
+    {
+        let y = radius + 5;
+    }
     return;
 }
 }
