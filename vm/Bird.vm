@@ -64,7 +64,7 @@ label IF_TRUE1
 push constant 0
 pop this 6
 label IF_FALSE1
-push constant 0
+push this 6
 return
 function Bird.draw 0
 push argument 0

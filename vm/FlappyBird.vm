@@ -1,0 +1,716 @@
+function FlappyBird.new 0
+push constant 9
+call Memory.alloc 1
+pop pointer 0
+push constant 150
+pop this 8
+push this 8
+call Bird.new 1
+pop this 0
+push constant 0
+pop this 7
+push constant 10
+call Array.new 1
+pop this 4
+push pointer 0
+return
+function FlappyBird.prestart 0
+push argument 0
+pop pointer 0
+call Screen.clearScreen 0
+pop temp 0
+push constant 83
+call String.new 1
+push constant 1056
+call String.appendChar 2
+push constant 8217
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1030
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 181
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1169
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1105
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8218
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 181
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8225
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1105
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1027
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 187
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1109
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8225
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1105
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1027
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 187
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1109
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1169
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 187
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1039
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1110
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 181
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1029
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 181
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1026
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 176
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8224
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1105
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1105
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1112
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 181
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1027
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8218
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1029
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1109
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1027
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8218
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1105
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Keyboard.readInt 1
+pop this 2
+push constant 8
+push constant 0
+call Screen.moveCursor 2
+pop temp 0
+push constant 75
+call String.new 1
+push constant 1056
+call String.appendChar 2
+push constant 1116
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 176
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 182
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1112
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1105
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8218
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 181
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1029
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 176
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1108
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 187
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 176
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1030
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1105
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 176
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8218
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1107
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1026
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1107
+call String.appendChar 2
+push constant 44
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8225
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8218
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1109
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 177
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8249
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1029
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 176
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8225
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 176
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 8218
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1034
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1105
+call String.appendChar 2
+push constant 1056
+call String.appendChar 2
+push constant 1110
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1026
+call String.appendChar 2
+push constant 1057
+call String.appendChar 2
+push constant 1107
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+call Screen.printString 1
+pop temp 0
+push constant 0
+return
+function FlappyBird.run 2
+push argument 0
+pop pointer 0
+push pointer 0
+call FlappyBird.createGame 1
+pop temp 0
+push pointer 0
+call FlappyBird.waitForGameToStart 1
+pop temp 0
+push constant 32
+pop local 1
+label WHILE_EXP0
+push local 0
+push constant 81
+eq
+not
+not
+if-goto WHILE_END0
+push this 7
+push constant 10
+add
+pop this 7
+push this 0
+call Bird.turn 1
+pop temp 0
+push pointer 0
+call FlappyBird.movePipes 1
+pop temp 0
+push pointer 0
+call FlappyBird.handleCollisions 1
+pop temp 0
+push this 0
+call Bird.draw 1
+pop temp 0
+push pointer 0
+call FlappyBird.drawPipes 1
+pop temp 0
+push this 6
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 1000
+call Sys.wait 1
+pop temp 0
+push constant 0
+return
+label IF_FALSE0
+push local 0
+pop local 1
+call Keyboard.keyPressed 0
+pop local 0
+push constant 10
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function FlappyBird.createGame 0
+push argument 0
+pop pointer 0
+push this 0
+call Bird.draw 1
+pop temp 0
+push pointer 0
+call FlappyBird.createPipes 1
+pop temp 0
+push pointer 0
+call FlappyBird.drawPipes 1
+pop temp 0
+push constant 0
+return
+function FlappyBird.movePipes 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 10
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 1
+call Pipe.turn 1
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function FlappyBird.drawPipes 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 10
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 1
+call Pipe.draw 1
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function FlappyBird.handleCollisions 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+push constant 0
+not
+pop local 2
+label WHILE_EXP0
+push local 0
+push constant 10
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 1
+push this 0
+push local 1
+call Bird.getAlive 2
+pop local 2
+push local 2
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop this 6
+push constant 0
+return
+label IF_FALSE0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function FlappyBird.createPipes 3
+push argument 0
+pop pointer 0
+push constant 0
+pop this 5
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push constant 10
+lt
+not
+if-goto WHILE_END0
+push this 5
+push constant 1
+add
+pop this 5
+push pointer 0
+push this 5
+call FlappyBird.pipeHeightByNumber 2
+pop local 2
+push local 2
+call Pipe.new 1
+pop local 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 0
+call Pipe.turn 1
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function FlappyBird.pipeHeightByNumber 1
+push argument 0
+pop pointer 0
+push argument 1
+push this 2
+call Math.multiply 2
+push constant 70
+add
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 20000
+gt
+not
+if-goto WHILE_END0
+push local 0
+push constant 20000
+sub
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+label WHILE_EXP1
+push local 0
+push constant 4000
+gt
+not
+if-goto WHILE_END1
+push local 0
+push constant 4000
+sub
+pop local 0
+goto WHILE_EXP1
+label WHILE_END1
+label WHILE_EXP2
+push local 0
+push constant 400
+gt
+not
+if-goto WHILE_END2
+push local 0
+push constant 400
+sub
+pop local 0
+goto WHILE_EXP2
+label WHILE_END2
+push local 0
+push constant 50
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 50
+pop local 0
+label IF_FALSE0
+push local 0
+return
+function FlappyBird.waitForGameToStart 1
+push argument 0
+pop pointer 0
+call Keyboard.keyPressed 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 0
+eq
+not
+if-goto WHILE_END0
+push constant 10
+call Sys.wait 1
+pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function FlappyBird.createNewPipe 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 9
+lt
+not
+if-goto WHILE_END0
+push this 5
+push constant 1
+add
+pop this 5
+push local 0
+push constant 1
+add
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 2
+push local 0
+push this 4
+add
+push local 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push this 5
+push constant 1
+add
+pop this 5
+push pointer 0
+push this 5
+call FlappyBird.pipeHeightByNumber 2
+pop local 1
+push constant 9
+push this 4
+add
+push local 1
+call Pipe.new 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
