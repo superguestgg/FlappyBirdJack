@@ -11,15 +11,15 @@ class Pipe
         let width = 5;
         let gapY = gapY1;
         let gapSize = 50;
-	  return this;
+	      return this;
     }
     
     method bool isCollidingWith(Bird bird)
     {
-        if (((bird.x + bird.radius) > x) & ((bird.x - bird.radius) < (x + width))) {
-        if (((bird.y + bird.radius) > (gapY + gapSize)) & ((bird.y - bird.radius) < gapY)) {
-            return true;
-        }
+        if (((bird.getX() + bird.getRadius()) > x) & ((bird.getX() - bird.getRadius()) < (x + width))) {
+          if (((bird.getY() + bird.getRadius()) > (gapY + gapSize)) & ((bird.getY() - bird.getRadius()) < gapY)) {
+              return true;
+          }
     	  }                   
         return false;
     }
@@ -32,7 +32,7 @@ class Pipe
     }
    
     method bool hasPassed(Bird bird) {
-        return ((bird.x - bird.radius) > (x + width));
+        return ((bird.getX() - bird.getRadius()) > (x + width));
     }                   
 
      method void draw() {
