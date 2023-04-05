@@ -216,10 +216,8 @@ push constant 10
 call Bird.turn 2
 pop temp 0
 push pointer 0
-call FlappyBird.movePipes 1
-pop temp 0
-push pointer 0
-call FlappyBird.handleCollisions 1
+push constant 10
+call FlappyBird.movePipes 2
 pop temp 0
 push this 0
 call Bird.draw 1
@@ -227,23 +225,14 @@ pop temp 0
 push pointer 0
 call FlappyBird.drawPipes 1
 pop temp 0
-push this 6
-not
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 1000
-call Sys.wait 1
-pop temp 0
-push constant 0
-return
-label IF_FALSE0
 push local 0
 pop local 1
 call Keyboard.keyPressed 0
 pop local 0
 push constant 10
 call Sys.wait 1
+pop temp 0
+call Screen.clearScreen 0
 pop temp 0
 goto WHILE_EXP0
 label WHILE_END0
@@ -280,7 +269,7 @@ pop pointer 1
 push that 0
 pop local 1
 push local 1
-push constant 10
+push argument 1
 call Pipe.turn 2
 pop temp 0
 push local 1
@@ -412,6 +401,22 @@ push local 2
 call Pipe.new 1
 pop local 0
 push local 1
+push this 4
+add
+push local 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 10
+push local 1
+sub
+push constant 300
+call Math.multiply 2
+call Pipe.turn 2
+pop temp 0
+push local 1
 push constant 1
 add
 pop local 1
@@ -424,6 +429,8 @@ push argument 0
 pop pointer 0
 push argument 1
 push this 2
+call Math.multiply 2
+push constant 10
 call Math.multiply 2
 push constant 70
 add
@@ -454,12 +461,12 @@ goto WHILE_EXP1
 label WHILE_END1
 label WHILE_EXP2
 push local 0
-push constant 400
+push constant 175
 gt
 not
 if-goto WHILE_END2
 push local 0
-push constant 400
+push constant 175
 sub
 pop local 0
 goto WHILE_EXP2
@@ -500,6 +507,14 @@ push argument 0
 pop pointer 0
 push constant 0
 pop local 0
+push local 0
+push constant 1
+add
+push this 4
+add
+pop pointer 1
+push that 0
+pop local 2
 label WHILE_EXP0
 push local 0
 push constant 9

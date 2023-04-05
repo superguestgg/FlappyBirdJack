@@ -79,6 +79,15 @@ label IF_TRUE1
 push constant 0
 pop this 6
 label IF_FALSE1
+push this 4
+push constant 255
+gt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+pop this 6
+label IF_FALSE2
 push this 6
 return
 function Bird.draw 0
@@ -98,7 +107,7 @@ return
 function Bird.jump 0
 push argument 0
 pop pointer 0
-push constant 100
+push constant 20
 neg
 pop this 1
 push constant 0
@@ -108,17 +117,11 @@ push argument 0
 pop pointer 0
 push this 4
 push argument 1
-add
 push this 1
 call Math.multiply 2
-push this 2
-add
-push constant 2
+push constant 50
 call Math.divide 2
-push argument 1
-call Math.multiply 2
-push argument 1
-call Math.multiply 2
+add
 pop local 0
 push local 0
 push constant 255
@@ -129,6 +132,8 @@ if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push constant 255
+push this 5
+sub
 pop this 4
 goto IF_END0
 label IF_FALSE0
@@ -137,9 +142,11 @@ pop this 4
 label IF_END0
 push this 1
 push this 2
-add
 push argument 1
 call Math.multiply 2
+push constant 50
+call Math.divide 2
+add
 pop this 1
 push constant 0
 return

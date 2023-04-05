@@ -4,8 +4,6 @@ pop local 0
 push local 0
 call FlappyBird.prestart 1
 pop temp 0
-call Keyboard.readChar 0
-pop local 1
 push local 0
 call FlappyBird.run 1
 pop temp 0
