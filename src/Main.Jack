@@ -4,14 +4,14 @@ class Main
     { 
         var FlappyBird game;
         let game = FlappyBird.new();
-	    do game.prestart();
+	  do game.prestart();
         var char gameStarted;
         let gameStarted = readChar();
         // Здесь начинается игра
 
         do game.run();
 
-        do game.dispose();
+        //do game.dispose();
         return;
     }
 }

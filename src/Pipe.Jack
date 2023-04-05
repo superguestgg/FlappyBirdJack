@@ -6,11 +6,12 @@ class Pipe
     field int gapSize; // высота дырки между двумя трубами
     field bool passedScene; // прошла ли труба через всю сцену
     
-    constructor Pipe new(int x1, int gapY1, int width1, int gapSize1) {
-        let x = x1;
-        let width = width1;
+    constructor Pipe new(int gapY1) {
+        let x = 250;
+        let width = 5;
         let gapY = gapY1;
-        let gapSize = gapSize1;
+        let gapSize = 50;
+	  return this;
     }
     
     method bool isCollidingWith(Bird bird)
@@ -19,7 +20,7 @@ class Pipe
         if (bird.y + bird.radius >= gapY + gapSize & bird.y - bird.radius <= gapY) {
             return true;
         }
-    }                   
+    	  }                   
         return false;
     }
    
@@ -27,16 +28,15 @@ class Pipe
 		
         let x = - deltaTime / 10 + x;
         let passedScene = x + width <= 0;
+        return;
     }
    
     method bool hasPassed(Bird bird) {
         return bird.x - bird.radius > x + width;
     }                   
-    return false;
-    }
 
      method void draw() {
-        Screen.setColor(true);
+        do Screen.setColor(true);
         if (x > 0) {
           do Screen.drawLine(x, 0, x, gapY);
           do Screen.drawLine(x, gapY, x + width, gapY);
@@ -46,5 +46,6 @@ class Pipe
           do Screen.drawLine(0, gapY, width + x, gapY);
           do Screen.drawLine(width + x, gapY, width + x, 0); 
         }
+	  return;
     }
 }

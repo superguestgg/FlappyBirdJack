@@ -20,18 +20,18 @@ constructor Bird new(int height)
     return this;
   }
 
-method bool turn(int deltaTime, Pipe pipe)
+method void turn(int deltaTime)
 {
     var char key;
     let key = Keyboard.keyPressed();
     if (key = 32)
     {
-	do jump;
+	do jump();
     }
-    do gravitation(int deltaTime);
+    do gravitation(deltaTime);
     do draw();
-    do getAlive(pipe)
-    return alive;
+    //do getAlive(pipe)
+    return;
 }
 
 method void getAlive(Pipe pipe)
