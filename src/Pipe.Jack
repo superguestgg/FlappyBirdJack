@@ -26,7 +26,7 @@ class Pipe
    
     method void turn(int deltaTime) {
 		
-        let x = (-(deltaTime / 10) + x);
+        let x = (x - (deltaTime / 10));
         let passedScene = ((x + width) < 0);
         return;
     }
