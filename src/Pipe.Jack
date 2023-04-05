@@ -16,8 +16,8 @@ class Pipe
     
     method bool isCollidingWith(Bird bird)
     {
-        if (((bird.x + bird.radius) >= x) & ((bird.x - bird.radius) <= (x + width))) {
-        if (((bird.y + bird.radius) >= (gapY + gapSize)) & ((bird.y - bird.radius) <= gapY)) {
+        if (((bird.x + bird.radius) > x) & ((bird.x - bird.radius) < (x + width))) {
+        if (((bird.y + bird.radius) > (gapY + gapSize)) & ((bird.y - bird.radius) < gapY)) {
             return true;
         }
     	  }                   
@@ -27,7 +27,7 @@ class Pipe
     method void turn(int deltaTime) {
 		
         let x = (-(deltaTime / 10) + x);
-        let passedScene = ((x + width) <= 0);
+        let passedScene = ((x + width) < 0);
         return;
     }
    
