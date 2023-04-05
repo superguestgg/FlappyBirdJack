@@ -185,7 +185,7 @@ class FlappyBird
         var int height;
         let height = number * ceed * 11 + 31;
         if (height > 1000){
-            let height = height - (height / 1000);
+            let height = height - ((height / 1000) * 1000);
         }
         while (height > 135){
             let height = height - 135;
