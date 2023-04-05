@@ -20,6 +20,21 @@ constructor Bird new(int height)
     return this;
   }
 
+method int getX()
+{
+    return x;
+}
+
+method int getY()
+{
+    return y;
+}
+
+method int getRadius()
+{
+    return radius;
+}
+
 method void turn(int deltaTime)
 {
     var char key;
