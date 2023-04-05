@@ -54,7 +54,7 @@ push argument 1
 call Bird.gravitation 2
 pop temp 0
 push pointer 0
-call Bird.draw 1
+call Bird.checkCoordinate 1
 pop temp 0
 push constant 0
 return
@@ -112,7 +112,7 @@ neg
 pop this 1
 push constant 0
 return
-function Bird.gravitation 1
+function Bird.gravitation 0
 push argument 0
 pop pointer 0
 push this 4
@@ -122,8 +122,21 @@ call Math.multiply 2
 push constant 50
 call Math.divide 2
 add
-pop local 0
-push local 0
+pop this 4
+push this 1
+push this 2
+push argument 1
+call Math.multiply 2
+push constant 50
+call Math.divide 2
+add
+pop this 1
+push constant 0
+return
+function Bird.checkCoordinate 0
+push argument 0
+pop pointer 0
+push this 4
 push constant 255
 push this 5
 sub
@@ -135,18 +148,17 @@ push constant 255
 push this 5
 sub
 pop this 4
-goto IF_END0
 label IF_FALSE0
-push local 0
-pop this 4
-label IF_END0
-push this 1
-push this 2
-push argument 1
-call Math.multiply 2
-push constant 50
-call Math.divide 2
+push this 4
+push constant 5
+lt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 5
+push constant 5
 add
-pop this 1
+pop this 4
+label IF_FALSE1
 push constant 0
 return

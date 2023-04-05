@@ -7,9 +7,12 @@ pop this 8
 push this 8
 call Bird.new 1
 pop this 0
+push constant 8
+pop this 10
 push constant 0
-pop this 7
-push constant 10
+not
+pop this 6
+push this 10
 call Array.new 1
 pop this 4
 push pointer 0
@@ -190,6 +193,8 @@ return
 function FlappyBird.run 2
 push argument 0
 pop pointer 0
+push constant 10
+pop local 1
 call Screen.clearScreen 0
 pop temp 0
 push pointer 0
@@ -198,8 +203,6 @@ pop temp 0
 push pointer 0
 call FlappyBird.drawPipes 1
 pop temp 0
-push constant 32
-pop local 1
 label WHILE_EXP0
 push local 0
 push constant 81
@@ -207,35 +210,193 @@ eq
 not
 not
 if-goto WHILE_END0
-push this 7
-push constant 10
-add
-pop this 7
 push this 0
-push constant 10
+push local 1
 call Bird.turn 2
 pop temp 0
 push pointer 0
-push constant 10
+push local 1
 call FlappyBird.movePipes 2
 pop temp 0
-push this 0
-call Bird.draw 1
-pop temp 0
 push pointer 0
-call FlappyBird.drawPipes 1
+call FlappyBird.handleCollisions 1
 pop temp 0
-push local 0
-pop local 1
-call Keyboard.keyPressed 0
-pop local 0
-push constant 10
+push this 6
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call FlappyBird.finishGame 1
+pop temp 0
+push constant 1000
 call Sys.wait 1
 pop temp 0
-call Screen.clearScreen 0
+push constant 0
+return
+label IF_FALSE0
+push pointer 0
+call FlappyBird.draw 1
+pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
+push local 1
+call Sys.wait 1
 pop temp 0
 goto WHILE_EXP0
 label WHILE_END0
+push constant 0
+return
+function FlappyBird.finishGame 0
+push argument 0
+pop pointer 0
+push constant 11
+call String.new 1
+push constant 32
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 11
+call String.new 1
+push constant 32
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 11
+call String.new 1
+push constant 32
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 11
+call String.new 1
+push constant 32
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 17
+call String.new 1
+push constant 32
+call String.appendChar 2
+push constant 112
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 112
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 102
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 104
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 5
+push this 10
+sub
+call Output.printInt 1
+pop temp 0
 push constant 0
 return
 function FlappyBird.createGame 0
@@ -249,6 +410,19 @@ call FlappyBird.createPipes 1
 pop temp 0
 push constant 0
 return
+function FlappyBird.draw 0
+push argument 0
+pop pointer 0
+call Screen.clearScreen 0
+pop temp 0
+push this 0
+call Bird.draw 1
+pop temp 0
+push pointer 0
+call FlappyBird.drawPipes 1
+pop temp 0
+push constant 0
+return
 function FlappyBird.movePipes 2
 push argument 0
 pop pointer 0
@@ -258,7 +432,7 @@ push constant 0
 pop this 9
 label WHILE_EXP0
 push local 0
-push constant 10
+push this 10
 lt
 not
 if-goto WHILE_END0
@@ -313,7 +487,7 @@ push constant 0
 pop local 0
 label WHILE_EXP0
 push local 0
-push constant 10
+push this 10
 lt
 not
 if-goto WHILE_END0
@@ -344,7 +518,7 @@ not
 pop local 2
 label WHILE_EXP0
 push local 0
-push constant 10
+push this 10
 lt
 not
 if-goto WHILE_END0
@@ -385,7 +559,7 @@ push constant 0
 pop local 1
 label WHILE_EXP0
 push local 1
-push constant 10
+push this 10
 lt
 not
 if-goto WHILE_END0
@@ -409,10 +583,10 @@ pop pointer 1
 push temp 0
 pop that 0
 push local 0
-push constant 10
+push this 10
 push local 1
 sub
-push constant 300
+push constant 500
 call Math.multiply 2
 call Pipe.turn 2
 pop temp 0
@@ -430,56 +604,40 @@ pop pointer 0
 push argument 1
 push this 2
 call Math.multiply 2
-push constant 10
+push constant 11
 call Math.multiply 2
-push constant 70
+push constant 31
 add
 pop local 0
+push local 0
+push constant 1000
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+push local 0
+push constant 1000
+call Math.divide 2
+sub
+pop local 0
+label IF_FALSE0
 label WHILE_EXP0
 push local 0
-push constant 20000
+push constant 135
 gt
 not
 if-goto WHILE_END0
 push local 0
-push constant 20000
+push constant 135
 sub
 pop local 0
 goto WHILE_EXP0
 label WHILE_END0
-label WHILE_EXP1
 push local 0
-push constant 4000
-gt
-not
-if-goto WHILE_END1
-push local 0
-push constant 4000
-sub
+push constant 40
+add
 pop local 0
-goto WHILE_EXP1
-label WHILE_END1
-label WHILE_EXP2
-push local 0
-push constant 175
-gt
-not
-if-goto WHILE_END2
-push local 0
-push constant 175
-sub
-pop local 0
-goto WHILE_EXP2
-label WHILE_END2
-push local 0
-push constant 50
-lt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 50
-pop local 0
-label IF_FALSE0
 push local 0
 return
 function FlappyBird.waitForGameToStart 1
@@ -507,17 +665,20 @@ push argument 0
 pop pointer 0
 push constant 0
 pop local 0
-push local 0
-push constant 1
-add
+push constant 0
 push this 4
 add
 pop pointer 1
 push that 0
 pop local 2
+push local 2
+call Pipe.dispose 1
+pop temp 0
 label WHILE_EXP0
 push local 0
-push constant 9
+push this 10
+push constant 1
+sub
 lt
 not
 if-goto WHILE_END0
@@ -555,7 +716,9 @@ push pointer 0
 push this 5
 call FlappyBird.pipeHeightByNumber 2
 pop local 1
-push constant 9
+push this 10
+push constant 1
+sub
 push this 4
 add
 push local 1
