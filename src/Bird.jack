@@ -1,125 +1,130 @@
 class Bird
 {
-field int speedX;
-field int speedY;
-field int g;
-field int x;
-field int y;
-field int radius;
-field bool alive;
-field int count;
+    field int speedX;
+    field int speedY;
+    field int g;
+    field int x;
+    field int y;
+    field int radius;
+    field bool alive;
+    field int count;
 
-constructor Bird new(int height) 
-{
-    let speedX = 0;
-    let speedY = 0;
-    let g = 10;
-    let x = 30;
-    let y = height;
-    let radius = 5;
-    let alive = true;
-    let count = 1;
-    return this;
-}
-
-method int getX()
-{
-    return x;
-}
-
-method int getY()
-{
-    return y;
-}
-
-method int getRadius()
-{
-    return radius;
-}
-
-method void turn(int deltaTime)
-{
-    var char key;
-    let key = Keyboard.keyPressed();
-    if (key = 32) {
-	    do jump();
-    }
-    do gravitation(deltaTime);
-    do checkCoordinate();
-    //do getAlive(pipe);
-    return;
-}
-
-method bool getAlive(Pipe pipe)
-{
-    if (pipe.isCollidingWith(this))	// Толин метод
-    { 
-	    let alive = false;
-    }
-    if (y < 0)
+    constructor Bird new(int height) 
     {
-	    let alive = false;
+        let speedX = 0;
+        let speedY = 0;
+        let g = 10;
+        let x = 30;
+        let y = height;
+        let radius = 5;
+        let alive = true;
+        let count = 1;
+        return this;
     }
-    if (y > 255)
+
+    method int getX()
     {
-	    let alive = false;
+        return x;
     }
-    return alive;
-}
 
-method void drawWing(int dy)
-{
-    do Screen.setColor(true);
-    do Screen.drawRectangle(x-(2*radius), y + dy, x, y + dy + (radius / 2)+2);
-    return;
-}
-
-method void draw()
-{
-    do Screen.setColor(true);
-    do Screen.drawCircle(x, y, radius);
-
-    if(count = 1)
+    method int getY()
     {
-        do drawWing(0);
+        return y;
     }
-    if(count = 2)
-    {
-        do drawWing(-2);
-    }
-    if(count = 3)
-    {
-        let count = 0;
-        do drawWing(-4);
-    }
-    let count = count + 1;
-    return;
-}
 
-method void jump()
-{
-    let speedY = -20;  // Если ось ОУ направлена вниз, значение должно быть отрицательным 
-    return;
-}
-
-method void gravitation(int deltaTime)
-{
-    let y = y + (deltaTime * speedY / 50); // Была неккоретная формула со скобками
-    let speedY = speedY + (g * deltaTime / 50);
-    return;
-}
-
-method void checkCoordinate()
-{
-    if (y > (255 - radius)) // Если newУ уходит вниз за пределы экрана (считаю что ось ОУ направлена вниз)
+    method int getRadius()
     {
-        let y = (255 - radius);
-        //let getAlive = false;
-    } 
-    if (y < 5)
-    {
-        let y = radius + 5;
+        return radius;
     }
-    return;
-}
+
+    method void turn(int deltaTime)
+    {
+        var char key;
+        let key = Keyboard.keyPressed();
+        if (key = 32) {
+            do jump();
+        }
+        do gravitation(deltaTime);
+        do checkCoordinate();
+        //do getAlive(pipe);
+        return;
+    }
+
+    method bool getAlive(Pipe pipe)
+    {
+        if (pipe.isCollidingWith(this))	// Толин метод
+        { 
+            let alive = false;
+        }
+        if (y < 0)
+        {
+            let alive = false;
+        }
+        if (y > 255)
+        {
+            let alive = false;
+        }
+        return alive;
+    }
+
+    method void drawWing(int dy)
+    {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x-(2*radius), y + dy, x, y + dy + (radius / 2)+2);
+        return;
+    }
+
+    method void draw()
+    {
+        do Screen.setColor(true);
+        do Screen.drawCircle(x, y, radius);
+
+        if(count = 1)
+        {
+            do drawWing(0);
+        }
+        if(count = 2)
+        {
+            do drawWing(-2);
+        }
+        if(count = 3)
+        {
+            let count = 0;
+            do drawWing(-4);
+        }
+        let count = count + 1;
+        return;
+    }
+
+    method void jump()
+    {
+        let speedY = -20;  // Если ось ОУ направлена вниз, значение должно быть отрицательным 
+        return;
+    }
+
+    method void gravitation(int deltaTime)
+    {
+        let y = y + (deltaTime * speedY / 50); // Была неккоретная формула со скобками
+        let speedY = speedY + (g * deltaTime / 50);
+        return;
+    }
+
+    method void checkCoordinate()
+    {
+        if (y > (255 - radius)) // Если newУ уходит вниз за пределы экрана (считаю что ось ОУ направлена вниз)
+        {
+            let y = (255 - radius);
+            //let getAlive = false;
+        } 
+        if (y < 5)
+        {
+            let y = radius + 5;
+        }
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+	    return;
+    }
 }

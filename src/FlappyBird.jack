@@ -7,7 +7,6 @@ class FlappyBird
   field Array pipes; // массив всех труб
   field int pipeSpawnNumber;
   field bool isBirdAlive;
-  field int birdX;
   field int bird_height_default;
   field int notDeletedPipes;
   field int windiowPipeCount; //какое количество труб влазит на экран
@@ -19,21 +18,13 @@ class FlappyBird
       let windiowPipeCount = 8;
       let isBirdAlive = true;
       let gapSizePipe = 80;
-      //let birdX = 0;
-      //let scoreboard = Scoreboard.new();
       let pipes = Array.new(windiowPipeCount);
-      //let count_pipes = 0;
-      //let dist_between_pipes = 100;
-      //let dist_after_last_pipe = 0;
-      //let jumps = 1;
-      //let total_pipes = 0;
-
       return this;
     }
 
   method void prestart() {
       do Screen.clearScreen(); // Очистить экран
-      let ceed = Keyboard.readInt("Please enter a number for generate a area: "); // Запросить у пользователя ввод числа
+      let ceed = Keyboard.readInt("Please enter a number for generate a area (your int must be in [1,50]): "); // Запросить у пользователя ввод числа
       // do Screen.moveCursor(8, 0); // Установить курсор в позицию (8,0)
       do Output.printString("touch on a keyboard to start a game."); // Напечатать сообщение
       // 1 тимейт д......, когда его попросили написать эту функцию делегировал задачу chatgpt,
@@ -53,7 +44,6 @@ class FlappyBird
 	    do drawPipes();
         // do waitForGameToStart();
         while (~(key = 81)) { // 'q' key
-            //do Output.printString("movePipes");
             do bird.turn(deltaTime);
             do movePipes(deltaTime);
 
@@ -63,8 +53,6 @@ class FlappyBird
                 //do Output.printString(" finish ");
                 do finishGame();
                 do Sys.wait(1000);
-                //do initializeGameState();
-                //do waitForGameToStart();
                 return;
             }
 
@@ -171,12 +159,9 @@ class FlappyBird
         let pipeSpawnNumber = 0;
         let pipeNowIndex=0;
         while (pipeNowIndex < windiowPipeCount){
-            let pipeSpawnNumber = pipeSpawnNumber + 1;
             let pipe = createPipe();
             let pipes[pipeNowIndex] = pipe; // Не было заполнения массива
             do pipe.turn((windiowPipeCount - pipeNowIndex) * 500);
-
-            //do bird.collision(pipe);
             let pipeNowIndex = pipeNowIndex + 1;
         }
         return;
@@ -188,16 +173,14 @@ class FlappyBird
         var int gapTopDistance;
         let minGapHeight = 40;
         let gapTopDistance = (255 - gapSizePipe - minGapHeight);
-        let height = (number*number*ceed*3)+(number * ceed * 11) + 31;
-        if (height > 1000){
+        let height = (number*number*ceed*3) + (number * ceed * 11) + 31;
+        while (height > 1000){
             let height = height - ((height / 1000) * 1000);
         }
         while (height > gapTopDistance){
-            //let height = height - (height / gapTopDistance) * gapTopDistance;
             let height = height - gapTopDistance;
         }
         let height = height + minGapHeight;
-        
         return height;
     }
 
@@ -208,8 +191,7 @@ class FlappyBird
         while (key = 0) {
             do Sys.wait(10);
             let key = Keyboard.keyPressed();
-            //do bird.draw();
-            //do updateBirdWingState();
+            do bird.draw();
         }
 
         return;
@@ -223,7 +205,7 @@ class FlappyBird
         do pipe.dispose();
 
         while (pipeNowIndex < (windiowPipeCount-1)){
-            let pipeSpawnNumber = pipeSpawnNumber + 1;
+            
 
             let pipe = pipes[pipeNowIndex+1];
             let pipes[pipeNowIndex] = pipe;
@@ -238,9 +220,11 @@ class FlappyBird
     method pipe createPipe(){
         var int pipeHeight;
         var Pipe pipe;
-        let pipeHeight = pipeHeightByNumber(pipeSpawnNumber);
+        var int pipeSpawnNumberDivided;
+        let pipeSpawnNumber = pipeSpawnNumber + 1;
+        let pipeSpawnNumberDivided = pipeSpawnNumber - ((pipeSpawnNumber/15)*15);
+        let pipeHeight = pipeHeightByNumber(pipeSpawnNumberDivided);
         let pipe = Pipe.new(pipeHeight, gapSizePipe);
-        //do Output.prin
         return pipe;
     }
 }
