@@ -5,14 +5,16 @@ class Main
         var FlappyBird game;
         var char gameStarted;
         let game = FlappyBird.new();
-	    do game.prestart();
-        
-        // let gameStarted = Keyboard.readChar();
-        // Здесь начинается игра
+        do game.prestart();
+        while (true){
+            
+            do game.run();
 
-        do game.run();
-
-        //do game.dispose();
+            do Output.printString("                  touch on keyboard to start a new game.");
+            do Keyboard.readChar();
+            do game.restart();
+        }
+        do game.dispose();
         return;
     }
 }

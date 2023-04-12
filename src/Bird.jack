@@ -46,13 +46,12 @@ class Bird
         }
         do gravitation(deltaTime);
         do checkCoordinate();
-        //do getAlive(pipe);
         return;
     }
 
     method bool getAlive(Pipe pipe)
     {
-        if (pipe.isCollidingWith(this))	// Толин метод
+        if (pipe.isCollidingWith(this))
         { 
             let alive = false;
         }
@@ -114,7 +113,6 @@ class Bird
         if (y > (255 - radius)) // Если newУ уходит вниз за пределы экрана (считаю что ось ОУ направлена вниз)
         {
             let y = (255 - radius);
-            //let getAlive = false;
         } 
         if (y < 5)
         {

@@ -19,6 +19,7 @@ class FlappyBird
       let isBirdAlive = true;
       let gapSizePipe = 80;
       let pipes = Array.new(windiowPipeCount);
+      let pipeSpawnNumber = 0;
       return this;
     }
 
@@ -26,11 +27,20 @@ class FlappyBird
       do Screen.clearScreen(); // Очистить экран
       let ceed = Keyboard.readInt("Please enter a number for generate a area (your int must be in [1,50]): "); // Запросить у пользователя ввод числа
       // do Screen.moveCursor(8, 0); // Установить курсор в позицию (8,0)
-      do Output.printString("touch on a keyboard to start a game."); // Напечатать сообщение
+      // do Output.printString("touch on a keyboard to start a game."); // Напечатать сообщение
       // 1 тимейт д......, когда его попросили написать эту функцию делегировал задачу chatgpt,
       // поэтому здесь так много комментариев к очевидным строкам,
       // а мне еще потом половину строк пришлось исправлять
       // upd: все строки, он забыл do написать
+      return;
+  }
+
+    method void restart() {
+        let pipeSpawnNumber = 0;
+        let bird_height_default = 150;
+      let bird = Bird.new(bird_height_default);
+      let isBirdAlive = true;
+      do prestart();
       return;
   }
 
@@ -42,7 +52,6 @@ class FlappyBird
         do Screen.clearScreen();
         do createGame();
 	    do drawPipes();
-        // do waitForGameToStart();
         while (~(key = 81)) { // 'q' key
             do bird.turn(deltaTime);
             do movePipes(deltaTime);
@@ -156,7 +165,6 @@ class FlappyBird
         var int pipeNowIndex;
 	    var int pipeHeight;
 
-        let pipeSpawnNumber = 0;
         let pipeNowIndex=0;
         while (pipeNowIndex < windiowPipeCount){
             let pipe = createPipe();
@@ -205,8 +213,6 @@ class FlappyBird
         do pipe.dispose();
 
         while (pipeNowIndex < (windiowPipeCount-1)){
-            
-
             let pipe = pipes[pipeNowIndex+1];
             let pipes[pipeNowIndex] = pipe;
             let pipeNowIndex = pipeNowIndex + 1;
@@ -226,5 +232,10 @@ class FlappyBird
         let pipeHeight = pipeHeightByNumber(pipeSpawnNumberDivided);
         let pipe = Pipe.new(pipeHeight, gapSizePipe);
         return pipe;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+	    return;
     }
 }

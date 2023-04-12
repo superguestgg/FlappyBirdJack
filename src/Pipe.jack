@@ -12,15 +12,12 @@ class Pipe
         let gapY = gapY1;
         let gapSize = gapSizeSet;
         let passedScene = false;
-        //do Output.printString(gapY);
 	    return this;
        
     }
     
     method bool isCollidingWith(Bird bird)
     {
-        //return false;
-        
         if (((bird.getX() + bird.getRadius()) > x) & ((bird.getX() - bird.getRadius()) < (x + width))) {
             if (((bird.getY() - bird.getRadius()) < (255 - gapY - gapSize)) | ((bird.getY() + bird.getRadius()) > (255 - gapY))) {
                 return true;
@@ -43,8 +40,6 @@ class Pipe
 
     method void draw() {
         do Screen.setColor(true);
-        //do Output.printInt(gapY);
-
         if (x > 0) {
             do Screen.drawRectangle(x, 255-gapY, x + width, 255); // Были значения, выходящие за границы экрана
             do Screen.drawRectangle(x, 0, x + width, 255-gapY-gapSize);
