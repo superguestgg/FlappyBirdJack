@@ -7,6 +7,7 @@ field int x;
 field int y;
 field int radius;
 field bool alive;
+field int count;
 
 constructor Bird new(int height) 
 {
@@ -17,6 +18,7 @@ constructor Bird new(int height)
     let y = height;
     let radius = 5;
     let alive = true;
+    let count = 1;
     return this;
 }
 
@@ -65,11 +67,32 @@ method bool getAlive(Pipe pipe)
     return alive;
 }
 
+method void drawWing(int dy)
+{
+    do Screen.setColor(true);
+    do Screen.drawRectangle(x-(2*radius), y + dy, x, y + dy + (radius / 2)+2);
+    return;
+}
+
 method void draw()
 {
     do Screen.setColor(true);
     do Screen.drawCircle(x, y, radius);
 
+    if(count = 1)
+    {
+        do drawWing(0);
+    }
+    if(count = 2)
+    {
+        do drawWing(-2);
+    }
+    if(count = 3)
+    {
+        let count = 0;
+        do drawWing(-4);
+    }
+    let count = count + 1;
     return;
 }
 
