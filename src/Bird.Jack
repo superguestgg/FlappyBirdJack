@@ -66,8 +66,8 @@ method bool getAlive(Pipe pipe)
 
 method void drawWing(int dy)
 {
-    do Screen.setColor(true);
-    do Screen.drawRectangle(x, y + dy, radius / 5, radius / 5, 255);
+    do Screen.setColor(white = true);
+    do Screen.drawRectangle(x, y + dy, x + radius / 5, y + dy + radius / 5);
     return;
 }
 
