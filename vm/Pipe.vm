@@ -8,7 +8,7 @@ push constant 10
 pop this 2
 push argument 0
 pop this 1
-push constant 50
+push argument 1
 pop this 3
 push constant 0
 pop this 4
@@ -42,22 +42,22 @@ call Bird.getY 1
 push argument 1
 call Bird.getRadius 1
 sub
-push constant 250
+push constant 255
 push this 1
 sub
 push this 3
 sub
-gt
+lt
 push argument 1
 call Bird.getY 1
 push argument 1
 call Bird.getRadius 1
 add
-push constant 250
+push constant 255
 push this 1
 sub
 gt
-and
+or
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
@@ -110,13 +110,25 @@ if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push this 0
-push constant 250
+push constant 255
 push this 1
 sub
 push this 0
 push this 2
 add
-push constant 250
+push constant 255
+call Screen.drawRectangle 4
+pop temp 0
+push this 0
+push constant 0
+push this 0
+push this 2
+add
+push constant 255
+push this 1
+sub
+push this 3
+sub
 call Screen.drawRectangle 4
 pop temp 0
 goto IF_END0
